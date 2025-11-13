@@ -5,6 +5,7 @@ import java.util.UUID;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -19,6 +20,12 @@ public class UserModel {
     private UUID id;
 
 //  Entende que os nomes das colunas no banco de dados serão os que estão abaixo mas caso eu queira mudar posso usar @Column(name = "nome_da_coluna")
+
+
+// a Anontação @Column serve para definir características específicas para a coluna no banco de dados
+//a propriedade unique faz com que não haja dois usuários com o mesmo username no banco de dados
+//a propriedade nullable define se o campo pode ser nulo ou não
+    @Column(unique = true, nullable = false)
     private String username;
     private String name;
     private String password;

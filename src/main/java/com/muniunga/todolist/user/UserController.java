@@ -3,6 +3,7 @@ package com.muniunga.todolist.user;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 
 
@@ -10,11 +11,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 @RequestMapping("/users")
 public class UserController {
    
+    @Autowired
+    private IUserRepository userRepository;
     @PostMapping
-    public void createUser(@RequestBody UserModel userModel) {
-        System.out.println("Username: " + userModel.getUsername());
-        System.out.println("Name: " + userModel.getName());
-        System.out.println("Password: " + userModel.getPassword());
+    public UserModel createUser(@RequestBody UserModel userModel) {
+       var savedUser = this.userRepository.save(userModel);
+       return savedUser;
     }    
 
 }
